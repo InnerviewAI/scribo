@@ -1,0 +1,224 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* Base Colors and Variables */
+:root {
+  --background: #fdfcff;
+  --foreground: #101828;
+}
+
+@theme inline {
+  /* Colors */
+  --color-dark: #101828;
+  --color-light: #eceef1;
+  --color-extra-light: #f7f8f9;
+  --color-primary: #ffffff;
+  --color-off-white: #fbf9ff;
+  --color-blog-header: #ffcf5d;
+  --color-accent: #fda700;
+  --color-accent-light: #ffcf5c;
+  --color-accent-extra-light: #fcf2e1;
+  --color-landing-accent: #fdd700;
+  --color-purple: #9747ff;
+  --color-purple-light: #bc88ff;
+  --color-landing-light: #fdfcff;
+  --color-danger: #e41a1a;
+  --color-line: #1c004114;
+  --color-light-line: #ebebeb;
+
+  /* Hover variants */
+  --color-hover-danger: #982929;
+
+  /* Text on backgrounds */
+  --color-on-dark: white;
+  --color-on-primary: #101828;
+  --color-on-light: #101828;
+  --color-on-extra-light: #101828;
+  --color-on-accent: #ffffff;
+  --color-on-purple: #ffffff;
+  --color-on-danger: white;
+  --color-on-hover-danger: white;
+
+  /* Border - Override default gray-200 used by Tailwind v4 for borders */
+  --color-gray-200: #1c004114;
+  --color-line: #1c004114;
+  --color-element-border: #1c004114;
+
+  /* Fonts */
+  --font-sans:
+    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* Font Sizes */
+  --font-size-13: 0.8125rem;
+  --line-height-13: 1.125rem;
+
+  /* Shadows */
+  --shadow-drop:
+    0 4px 4px -1px rgba(0, 0, 0, 0.02), 0 1px 1px 0px rgba(0, 0, 0, 0.06);
+  --shadow-hard-drop: 4px 4px 0px 0px #101828;
+  --shadow-hard-drop-accent: 3px 3px 0px 0px #fdd700;
+
+  /* Animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-fade-in: fade-in 0.1s ease-out forwards;
+  --animate-fade-out: fade-out 0.1s ease-out forwards;
+  --animate-scale-up-down: scale-up-down 2s ease-in-out infinite;
+  --animate-grow-width: grow-width 2s ease-in-out;
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scale-up-down {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes grow-width {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(100%);
+  }
+}
+
+body {
+  background-color: var(--color-landing-light);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Override default border color for Tailwind v4 */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+/* Prose/Markdown Styles */
+@layer base {
+  .prose {
+    @apply max-w-none;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    @apply font-bold;
+  }
+
+  .prose h1 {
+    @apply text-4xl;
+  }
+
+  .prose h2 {
+    @apply text-3xl;
+  }
+
+  .prose h3 {
+    @apply text-2xl;
+  }
+
+  .prose h4 {
+    @apply text-xl;
+  }
+
+  .prose p {
+    @apply my-4;
+  }
+
+  .prose a {
+    @apply text-accent underline;
+  }
+
+  .prose hr {
+    @apply my-8;
+  }
+
+  .prose ul,
+  .prose ol {
+    @apply my-4 ml-6;
+  }
+
+  .prose li {
+    @apply my-2;
+  }
+
+  .prose code {
+    @apply rounded bg-extra-light px-1 py-0.5 font-mono text-sm;
+  }
+
+  .prose pre {
+    @apply my-4 overflow-x-auto rounded bg-dark p-4;
+  }
+
+  .prose pre code {
+    @apply bg-transparent text-on-dark;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-accent pl-4 italic;
+  }
+
+  .prose img {
+    @apply my-4 rounded-lg;
+  }
+
+  .prose table {
+    @apply my-4 w-full;
+  }
+
+  .prose th {
+    @apply bg-light p-2 text-left font-bold;
+  }
+
+  .prose td {
+    @apply border-t p-2;
+  }
+}
