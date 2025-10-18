@@ -68,21 +68,22 @@ Scribo uses a component injection system that allows you to customize every aspe
 
 ### Basic Configuration
 
-Create a `config.ts` file to configure your blog:
+Create a `config.customized.ts` file to configure your blog:
 
 ```typescript
-import { setScriboConfig } from './lib/config'
+import type { ScriboConfig } from './lib/config/types'
 
-setScriboConfig({
+export const customConfig: Partial<ScriboConfig> = {
   siteName: 'My Blog',
   siteDescription: 'My awesome blog',
   siteUrl: 'https://myblog.com',
+  ogImageUrl: 'https://myblog.com/images/og-image.png', // Optional: Custom OpenGraph image URL
 
   api: {
     growPilotApiKey: process.env.GROWPILOT_API_KEY || '',
     growPilotDomain: process.env.NEXT_PUBLIC_GROWPILOT_DOMAIN || '',
   },
-})
+}
 ```
 
 ### Custom Components
@@ -90,12 +91,21 @@ setScriboConfig({
 You can inject custom components to replace the defaults:
 
 ```typescript
-import { setScriboConfig } from './lib/config'
+import type { ScriboConfig } from './lib/config/types'
 import { MyFooter } from './components/my-footer'
 import { MyHeader } from './components/my-header'
 
-setScriboConfig({
-  // ... other config
+export const customConfig: Partial<ScriboConfig> = {
+  siteName: 'My Blog',
+  siteDescription: 'My awesome blog',
+  siteUrl: 'https://myblog.com',
+  ogImageUrl: 'https://myblog.com/images/og-image.png',
+
+  api: {
+    growPilotApiKey: process.env.GROWPILOT_API_KEY || '',
+    growPilotDomain: process.env.NEXT_PUBLIC_GROWPILOT_DOMAIN || '',
+  },
+
   components: {
     Header: MyHeader,
     Footer: MyFooter,
@@ -107,7 +117,7 @@ setScriboConfig({
     TryProductCard: MyProductCard,
     BlogAuthorInfo: MyAuthorInfo,
   },
-})
+}
 ```
 
 ### Available Component Injection Points
@@ -227,7 +237,7 @@ scribo/
 
 ## Example: Innerview Configuration
 
-See `config.innerview.example.ts` for a complete example of how Innerview configures Scribo with custom branding and components.
+See `config.customized.ts` for a complete example of how Innerview configures Scribo with custom branding and components.
 
 ## Deployment
 
